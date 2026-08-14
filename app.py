@@ -75,31 +75,18 @@ if selected_model == "Freight Cost Prediction":
     **Objective:**
 
     Predict freight cost for a vendor invoice using
-    **Quantity** and **Invoice Dollars** to support
-    budgeting, forecasting, and vendor negotiations.
+    **Invoice Dollars** to support budgeting,
+    forecasting, and vendor negotiations.
     """)
 
     with st.form("freight_form"):
 
-        col1, col2 = st.columns(2)
-
-        with col1:
-
-            quantity = st.number_input(
-                "Quantity",
-                min_value=1,
-                value=1200,
-                step=1
-            )
-
-        with col2:
-
-            dollars = st.number_input(
-                "Invoice Dollars",
-                min_value=1.0,
-                value=18500.0,
-                step=100.0
-            )
+        dollars = st.number_input(
+            "Invoice Dollars",
+            min_value=1.0,
+            value=18500.0,
+            step=100.0
+        )
 
         submit_freight = st.form_submit_button(
             "🔮 Predict Freight Cost"
@@ -108,7 +95,6 @@ if selected_model == "Freight Cost Prediction":
     if submit_freight:
 
         input_data = {
-            "Quantity": [quantity],
             "Dollars": [dollars]
         }
 
@@ -134,7 +120,7 @@ if selected_model == "Freight Cost Prediction":
         except Exception as e:
 
             st.error(
-                f"❌ Unable to generate prediction: {e}"
+                f"Unable to generate prediction: {e}"
             )
 
 
@@ -153,12 +139,12 @@ else:
 
     Predict whether a vendor invoice should be
     **flagged for manual approval** based on abnormal
-    cost, freight, and operational patterns.
+    invoice and item cost patterns.
     """)
 
     with st.form("invoice_flag_form"):
 
-        col1, col2, col3 = st.columns(3)
+        col1, col2 = st.columns(2)
 
         # -------------------------------------------------
         # Column 1
@@ -207,34 +193,17 @@ else:
                 step=10.0
             )
 
-        # -------------------------------------------------
-        # Column 3
-        # -------------------------------------------------
-
-        with col3:
-
-            total_brands = st.number_input(
-                "Total Brands",
-                min_value=1,
-                value=5,
-                step=1
-            )
-
-            days_po_to_invoice = st.number_input(
-                "Days PO to Invoice",
-                min_value=0,
-                value=5,
-                step=1
-            )
-
         submit_flag = st.form_submit_button(
             "🔍 Evaluate Invoice Risk"
         )
 
+    # -----------------------------------------------------
+    # Prediction
+    # -----------------------------------------------------
+
     if submit_flag:
 
         input_data = {
-
             "invoice_quantity": [
                 invoice_quantity
             ],
@@ -247,16 +216,8 @@ else:
                 freight
             ],
 
-            "total_brands": [
-                total_brands
-            ],
-
             "total_item_quantity": [
                 total_item_quantity
-            ],
-
-            "days_po_to_invoice": [
-                days_po_to_invoice
             ],
 
             "total_item_dollars": [
@@ -302,5 +263,5 @@ else:
         except Exception as e:
 
             st.error(
-                f"❌ Unable to evaluate invoice: {e}"
+                f"Unable to evaluate invoice: {e}"
             )
