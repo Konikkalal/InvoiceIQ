@@ -1,6 +1,26 @@
-# Database
-data/inventory.db
-
-
+# Jupyter
 .ipynb_checkpoints/
 
+# VS Code
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
+
+# Environment variables
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local databases
+data/*.db
+
+# Temporary files
+*.tmp
