@@ -1,2 +1,2 @@
-# InvoiceIQ-
+# InvoiceIQ
 AI-Powered Invoice Intelligence Platform
