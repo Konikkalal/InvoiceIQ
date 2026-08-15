@@ -1,5 +1,9 @@
 # 📊 InvoiceIQ
 
+### 🚀 Live Demo
+
+👉 [Launch InvoiceIQ](https://invoiceiq-kktntlxzordgj9qrcc6huv.streamlit.app/)
+
 ### AI-Powered Vendor Invoice Intelligence Platform
 
 **InvoiceIQ** is an end-to-end Machine Learning application designed to help finance teams analyze vendor invoices, predict expected freight costs, and identify invoices that may require manual approval.
