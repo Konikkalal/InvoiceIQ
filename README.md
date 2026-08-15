@@ -259,6 +259,21 @@ or:
 
 ---
 
+## 📸 Application Screenshots
+
+### 🏠 Freight Cost Prediction
+
+![InvoiceIQ Dashboard](screenshots/dashboard.png)
+
+### 🚚 Invoice Flagging 
+
+![Freight Cost Prediction](screenshots/freight_prediction.png)
+
+### ⚠️ Invoice Risk Flagging
+
+![Invoice Risk Flagging](screenshots/invoice_risk.png)
+
+
 ## 🏗️ System Architecture
 
 ```text
