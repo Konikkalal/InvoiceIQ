@@ -11,26 +11,27 @@ from inference.predict_invoice_flag import predict_invoice_flag
 # =========================================================
 
 st.set_page_config(
-    page_title="Vendor Invoice Intelligence Portal",
+    page_title="InvoiceIQ",
     page_icon="📊",
     layout="wide"
 )
 
 
 # =========================================================
-# Header Section
+# Header
 # =========================================================
 
 st.markdown("""
-# Vendor Invoice Intelligence Portal
+# 📊 InvoiceIQ
 
 ### AI-Driven Freight Cost Prediction & Invoice Risk Flagging
 
-This internal analytics portal leverages machine learning to:
+This intelligent analytics platform leverages machine learning to:
 
-- **Forecast freight costs**
+- **Predict expected freight costs**
 - **Detect risky or abnormal vendor invoices**
-- **Reduce financial leakage and manual workload**
+- **Support faster financial decision-making**
+- **Reduce manual invoice review workload**
 """)
 
 st.divider()
@@ -40,7 +41,7 @@ st.divider()
 # Sidebar
 # =========================================================
 
-st.sidebar.title("Model Selection")
+st.sidebar.title("🔍 Model Selection")
 
 selected_model = st.sidebar.radio(
     "Choose Prediction Module",
@@ -53,11 +54,12 @@ selected_model = st.sidebar.radio(
 st.sidebar.markdown("""
 ---
 
-### Business Impact
+### 💼 Business Impact
 
 - Improved cost forecasting
 - Reduced invoice anomalies
 - Faster finance operations
+- Better financial control
 """)
 
 
@@ -73,8 +75,8 @@ if selected_model == "Freight Cost Prediction":
     **Objective:**
 
     Predict freight cost for a vendor invoice using
-    **Quantity** and **Invoice Dollars** to support budgeting,
-    forecasting, and vendor negotiations.
+    **Quantity** and **Invoice Dollars** to support
+    budgeting, forecasting, and vendor negotiations.
     """)
 
     with st.form("freight_form"):
@@ -86,7 +88,8 @@ if selected_model == "Freight Cost Prediction":
             quantity = st.number_input(
                 "Quantity",
                 min_value=1,
-                value=1200
+                value=1200,
+                step=1
             )
 
         with col2:
@@ -94,11 +97,12 @@ if selected_model == "Freight Cost Prediction":
             dollars = st.number_input(
                 "Invoice Dollars",
                 min_value=1.0,
-                value=18500.0
+                value=18500.0,
+                step=100.0
             )
 
         submit_freight = st.form_submit_button(
-            "Predict Freight Cost"
+            "🔮 Predict Freight Cost"
         )
 
     if submit_freight:
@@ -108,22 +112,30 @@ if selected_model == "Freight Cost Prediction":
             "Dollars": [dollars]
         }
 
-        prediction_result = predict_freight_cost(
-            input_data
-        )
+        try:
 
-        prediction = prediction_result[
-            "Predicted_Freight"
-        ]
+            prediction_result = predict_freight_cost(
+                input_data
+            )
 
-        st.success(
-            "Prediction completed successfully."
-        )
+            prediction = prediction_result[
+                "Predicted_Freight"
+            ]
 
-        st.metric(
-            label="Estimated Freight Cost",
-            value=f"${prediction[0]:,.2f}"
-        )
+            st.success(
+                "✅ Prediction completed successfully."
+            )
+
+            st.metric(
+                label="Estimated Freight Cost",
+                value=f"${prediction[0]:,.2f}"
+            )
+
+        except Exception as e:
+
+            st.error(
+                f"❌ Unable to generate prediction: {e}"
+            )
 
 
 # =========================================================
@@ -141,75 +153,82 @@ else:
 
     Predict whether a vendor invoice should be
     **flagged for manual approval** based on abnormal
-    cost, freight, and delivery patterns.
+    cost, freight, and operational patterns.
     """)
 
     with st.form("invoice_flag_form"):
 
         col1, col2, col3 = st.columns(3)
 
-        # ---------------------------------------------
+        # -------------------------------------------------
         # Column 1
-        # ---------------------------------------------
+        # -------------------------------------------------
 
         with col1:
 
             invoice_quantity = st.number_input(
                 "Invoice Quantity",
                 min_value=1,
-                value=50
+                value=50,
+                step=1
             )
 
             invoice_dollars = st.number_input(
                 "Invoice Dollars",
                 min_value=1.0,
-                value=352.95
+                value=352.95,
+                step=10.0
             )
 
             freight = st.number_input(
                 "Freight Cost",
                 min_value=0.0,
-                value=1.73
+                value=1.73,
+                step=0.10
             )
 
-        # ---------------------------------------------
+        # -------------------------------------------------
         # Column 2
-        # ---------------------------------------------
+        # -------------------------------------------------
 
         with col2:
 
             total_item_quantity = st.number_input(
                 "Total Item Quantity",
                 min_value=1,
-                value=162
+                value=162,
+                step=1
             )
 
             total_item_dollars = st.number_input(
                 "Total Item Dollars",
                 min_value=1.0,
-                value=2476.0
+                value=2476.0,
+                step=10.0
             )
 
-        # ---------------------------------------------
+        # -------------------------------------------------
         # Column 3
-        # ---------------------------------------------
+        # -------------------------------------------------
 
         with col3:
 
             total_brands = st.number_input(
                 "Total Brands",
                 min_value=1,
-                value=5
+                value=5,
+                step=1
             )
 
             days_po_to_invoice = st.number_input(
                 "Days PO to Invoice",
                 min_value=0,
-                value=5
+                value=5,
+                step=1
             )
 
         submit_flag = st.form_submit_button(
-            "Evaluate Invoice Risk"
+            "🔍 Evaluate Invoice Risk"
         )
 
     if submit_flag:
@@ -245,26 +264,43 @@ else:
             ]
         }
 
-        flag_result = predict_invoice_flag(
-            input_data
-        )
+        try:
 
-        flag_prediction = flag_result[
-            "Predicted_Flag"
-        ]
-
-        is_flagged = bool(
-            flag_prediction[0]
-        )
-
-        if is_flagged:
-
-            st.error(
-                "🚨 Invoice requires **MANUAL APPROVAL**"
+            flag_result = predict_invoice_flag(
+                input_data
             )
 
-        else:
+            flag_prediction = flag_result[
+                "Predicted_Flag"
+            ]
 
-            st.success(
-                "✅ Invoice is **SAFE for Auto-Approval**"
+            is_flagged = bool(
+                flag_prediction[0]
+            )
+
+            if is_flagged:
+
+                st.error(
+                    "🚨 Invoice requires **MANUAL APPROVAL**"
+                )
+
+                st.warning(
+                    "The machine learning model has identified "
+                    "this invoice as potentially risky."
+                )
+
+            else:
+
+                st.success(
+                    "✅ Invoice is **SAFE for Auto-Approval**"
+                )
+
+                st.info(
+                    "No significant risk was detected by the model."
+                )
+
+        except Exception as e:
+
+            st.error(
+                f"❌ Unable to evaluate invoice: {e}"
             )
