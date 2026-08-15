@@ -263,11 +263,11 @@ or:
 
 ### 🏠 Freight Cost Prediction
 
-![InvoiceIQ Dashboard](screenshots/dashboard.png)
-
+![InvoiceIQ Dashboard](screenshots/freight_prediction.png)
+screenshots/freight_prediction.png
 ### 🚚 Invoice Flagging 
 
-![Freight Cost Prediction](screenshots/freight_prediction.png)
+![Freight Cost Prediction](screenshots/dashboard.png)
 
 ### ⚠️ Invoice Risk Flagging
 
