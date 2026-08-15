@@ -264,14 +264,13 @@ or:
 ### 🏠 Freight Cost Prediction
 
 ![InvoiceIQ Dashboard](screenshots/freight_prediction.png)
-screenshots/freight_prediction.png
 ### 🚚 Invoice Flagging 
 
-![Freight Cost Prediction](screenshots/dashboard.png)
+![Freight Cost Prediction](screenshots/invoice_risk.png)
 
 ### ⚠️ Invoice Risk Flagging
 
-![Invoice Risk Flagging](screenshots/invoice_risk.png)
+![Invoice Risk Flagging](screenshots/dashboard.png)
 
 
 ## 🏗️ System Architecture
