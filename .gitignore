@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Jupyter
 .ipynb_checkpoints/
 
@@ -24,3 +25,9 @@ data/*.db
 
 # Temporary files
 *.tmp
+=======
+# Database
+data/inventory.db
+
+
+>>>>>>> 06f2473 (Finalize InvoiceIQ prediction modules)

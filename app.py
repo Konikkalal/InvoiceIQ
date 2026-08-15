@@ -109,7 +109,11 @@ if selected_model == "Freight Cost Prediction":
             ]
 
             st.success(
+<<<<<<< HEAD
                 "✅ Prediction completed successfully."
+=======
+                "Prediction completed successfully."
+>>>>>>> 06f2473 (Finalize InvoiceIQ prediction modules)
             )
 
             st.metric(
